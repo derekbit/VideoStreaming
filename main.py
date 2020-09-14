@@ -1,5 +1,8 @@
 from flask import Flask, Response, render_template
 from camera import VideoCamera
+import argparse
+import cv2
+from yolo import prepare_net
 
 app = Flask(__name__)
 
@@ -20,4 +23,24 @@ def video_feed():
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('-w', '--weights',
+        type=str,
+        default='./yolov3-tiny/yolov3-tiny.weights',
+        help='Path to the file which contains the weights for YOLOv3.')
+
+    parser.add_argument('-c', '--config',
+        type=str,
+        default='./yolov3-tiny/yolov3-tiny.cfg',
+        help='Path to the configuration file for YOLOv3 model.')
+
+    parser.add_argument('-l', '--labels',
+        type=str,
+        default='./yolov3-tiny/coco.names',
+        help='Path to the labels file for YOLOv3 model.')
+
+    args, unparsed = parser.parse_known_args()
+    prepare_net(args.config, args.weights, args.labels)
+
     app.run(host='0.0.0.0', port=5000, debug=True)

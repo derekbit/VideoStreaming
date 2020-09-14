@@ -8,3 +8,9 @@ Demonstrate how to stream video using Flask and OpenCV.
 apt install python3 python3-opencv python3-pip
 pip3 install flask
 ```
+
+
+## Run
+```
+python3 main.py
+```
