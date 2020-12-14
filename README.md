@@ -14,3 +14,8 @@ pip3 install flask
 ```
 python3 main.py
 ```
+
+## Webpage
+```
+http://<Server IP>:5000
+```
